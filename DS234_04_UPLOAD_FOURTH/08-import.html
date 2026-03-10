@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>DATA / STAT 234 - 11&nbsp; Data Import</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./13-knn.html" rel="next">
+<link href="./10-merging.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="modern.css" rel="stylesheet">
+<script src="modern.js" defer></script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-tidyr.html">Data Wrangling</a></li><li class="breadcrumb-item"><a href="./08-import.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Import</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">DATA / STAT 234</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus and Course Information</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">The Core</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Plotting with <code>ggplot2</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Wrangling with <code>dplyr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-comm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Communication with <code>Quarto</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Workflow and Other Skills</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Data Wrangling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-tidyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tidying with <code>tidyr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-forcats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Factors with <code>forcats</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Coding in Base <code>R</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Ethics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-merging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Merging with <code>dplyr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-import.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Import</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Special Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-knn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Predictive Modeling with knn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-stringr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Text Data with <code>tidytext</code> and <code>stringr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-lubridate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Dates with <code>lubridate</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-connections.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Connections to STAT 113, STAT 213, and CS 140</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to SQL with <code>dbplyr</code></span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#readr-to-read-in-data" id="toc-readr-to-read-in-data" class="nav-link active" data-scroll-target="#readr-to-read-in-data"><span class="header-section-number">11.1</span> <code>readr</code> to Read in Data</a>
+  <ul class="collapse">
+<li><a href="#read_csv-options" id="toc-read_csv-options" class="nav-link" data-scroll-target="#read_csv-options"><span class="header-section-number">11.1.1</span> <code>read_csv()</code> Options</a></li>
+  </ul>
+</li>
+  <li><a href="#data-scraping-with-rvest" id="toc-data-scraping-with-rvest" class="nav-link" data-scroll-target="#data-scraping-with-rvest"><span class="header-section-number">11.2</span> Data Scraping with <code>rvest</code></a></li>
+  <li>
+<a href="#json-files-with-jsonlite" id="toc-json-files-with-jsonlite" class="nav-link" data-scroll-target="#json-files-with-jsonlite"><span class="header-section-number">11.3</span> JSON Files with <code>jsonlite</code></a>
+  <ul class="collapse">
+<li><a href="#everything-working-well" id="toc-everything-working-well" class="nav-link" data-scroll-target="#everything-working-well"><span class="header-section-number">11.3.1</span> Everything Working Well</a></li>
+  <li><a href="#things-arent-always-so-easy" id="toc-things-arent-always-so-easy" class="nav-link" data-scroll-target="#things-arent-always-so-easy"><span class="header-section-number">11.3.2</span> Things Aren’t Always So Easy</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">11.4</span> Practice</a>
+  <ul class="collapse">
+<li><a href="#class-exercises" id="toc-class-exercises" class="nav-link" data-scroll-target="#class-exercises"><span class="header-section-number">11.4.1</span> Class Exercises</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.4.2</span> Your Turn</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-tidyr.html">Data Wrangling</a></li><li class="breadcrumb-item"><a href="./08-import.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Import</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="import" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Import</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p><strong>Goals:</strong></p>
+<ul>
+<li><p>Use <code>readr</code> to read in data to <code>R</code> from .csv, .txt, and .tsv files.</p></li>
+<li><p>Use <code>rvest</code> to scrape data from public websites.</p></li>
+<li><p>Use <code>jsonlite</code> to read in data in JSON (Java Script Object Notation) files.</p></li>
+</ul>
+<section id="readr-to-read-in-data" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="readr-to-read-in-data">
+<span class="header-section-number">11.1</span> <code>readr</code> to Read in Data</h2>
+<p>Up to now, we have mostly worked with data that was “<code>R</code> Ready”: meaning that it was in a nice .csv file that could be read into <code>R</code> easily with <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> from the <code>readr</code> package. We will begin by looking at some options in the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> function and then move into formats other than .csv that data are commonly stored in.</p>
+<section id="read_csv-options" class="level3" data-number="11.1.1"><h3 data-number="11.1.1" class="anchored" data-anchor-id="read_csv-options">
+<span class="header-section-number">11.1.1</span> <code>read_csv()</code> Options</h3>
+<p>The <code>mtcarsex.csv</code> has observations on different car models with variables that include things like gas mileage, number of cylinders, etc. Read in the <code>mtcarsex.csv</code> data set with the following code. Then, examine the data set.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
+<span><span class="va">cars_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/mtcarsex.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cars_df</span></span>
+<span><span class="co">#&gt; # A tibble: 36 × 11</span></span>
+<span><span class="co">#&gt;   This is a data set about …¹ ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9 </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 "I'm a na\x95ve data input… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 2 "mpg"                       cyl   disp  hp    drat  wt    qsec  vs    am   </span></span>
+<span><span class="co">#&gt; 3  &lt;NA&gt;                       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 4  &lt;NA&gt;                       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 5 "-999"                      6     160   110   3.9   2.62  16.46 0     1    </span></span>
+<span><span class="co">#&gt; 6 "21"                        6     160   110   3.9   2.875 17.02 0     1    </span></span>
+<span><span class="co">#&gt; # ℹ 30 more rows</span></span>
+<span><span class="co">#&gt; # ℹ abbreviated name: ¹​`This is a data set about cars.`</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: ...10 &lt;chr&gt;, ...11 &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What do you notice about the data set that seems odd? Open the .csv file with Excel or some other program to examine the data set outside of <code>R</code>.</p>
+<p>Type in <code><a href="https://readr.tidyverse.org/reference/read_delim.html">?read_csv</a></code> in the bottom-left window and look at some of the options in <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>. In particular, we will use the <code>na</code> and the <code>skip</code> arguments to fix up our reading.</p>
+<p>Let’s start with <code>skip</code> so that we aren’t reading in the first two rows of the data set:</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cars_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/mtcarsex.csv"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">## first two lines will be skipped</span></span>
+<span><span class="va">cars_df</span></span>
+<span><span class="co">#&gt; # A tibble: 34 × 11</span></span>
+<span><span class="co">#&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1   NA      NA    NA    NA NA    NA     NA      NA    NA    NA    NA</span></span>
+<span><span class="co">#&gt; 2   NA      NA    NA    NA NA    NA     NA      NA    NA    NA    NA</span></span>
+<span><span class="co">#&gt; 3 -999       6   160   110  3.9   2.62  16.5     0     1     4     4</span></span>
+<span><span class="co">#&gt; 4   21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></span>
+<span><span class="co">#&gt; 5   22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></span>
+<span><span class="co">#&gt; 6   21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></span>
+<span><span class="co">#&gt; # ℹ 28 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>That looks better, but there are still a couple of problems. What do you notice?</p>
+<p>Go to the help and read about the <code>na</code> argument. Let’s add that as an option to fix the missing value issue.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cars_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/mtcarsex.csv"</span><span class="op">)</span>, na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-999"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">cars_df</span></span>
+<span><span class="co">#&gt; # A tibble: 34 × 11</span></span>
+<span><span class="co">#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  NA      NA    NA    NA NA    NA     NA      NA    NA    NA    NA</span></span>
+<span><span class="co">#&gt; 2  NA      NA    NA    NA NA    NA     NA      NA    NA    NA    NA</span></span>
+<span><span class="co">#&gt; 3  NA       6   160   110  3.9   2.62  16.5     0     1     4     4</span></span>
+<span><span class="co">#&gt; 4  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></span>
+<span><span class="co">#&gt; 5  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></span>
+<span><span class="co">#&gt; 6  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></span>
+<span><span class="co">#&gt; # ℹ 28 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now look at the classes of each variable. Which classes look like they are incorrect?</p>
+<p>We’ve talked about how to re-specify classes of variables using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and the <code><a href="https://rdrr.io/r/base/factor.html">as.factor()</a></code> or <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code> or <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> functions, but sometimes it’s easier just to respecify the class when we are reading in the data. Notice how, when we use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>, <code>R</code> gives us a message about each of the column types. This is actually an argument in <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> called <code>col_types</code>. We can add a <code>|&gt; spec()</code> piping statement after a <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> statement to tell <code>R</code> to print the <code>col_types</code> so that it’s easy for us to copy and paste it into <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and change any classes.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/mtcarsex.csv"</span><span class="op">)</span>, na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-999"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/spec.html">spec</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; cols(</span></span>
+<span><span class="co">#&gt;   mpg = col_double(),</span></span>
+<span><span class="co">#&gt;   cyl = col_double(),</span></span>
+<span><span class="co">#&gt;   disp = col_double(),</span></span>
+<span><span class="co">#&gt;   hp = col_double(),</span></span>
+<span><span class="co">#&gt;   drat = col_double(),</span></span>
+<span><span class="co">#&gt;   wt = col_double(),</span></span>
+<span><span class="co">#&gt;   qsec = col_double(),</span></span>
+<span><span class="co">#&gt;   vs = col_double(),</span></span>
+<span><span class="co">#&gt;   am = col_double(),</span></span>
+<span><span class="co">#&gt;   gear = col_double(),</span></span>
+<span><span class="co">#&gt;   carb = col_double()</span></span>
+<span><span class="co">#&gt; )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For example, notice how <code>cyl = col_double()</code> is changed to <code>cyl = col_factor()</code> in the code chunk below:</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cars_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/mtcarsex.csv"</span><span class="op">)</span>, na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"-999"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span></span>
+<span>  mpg <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cyl <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_factor.html">col_factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  disp <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  hp <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  drat <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  wt <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  qsec <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  vs <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_factor.html">col_factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  am <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  gear <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  carb <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, there are two rows with all missing values. These aren’t providing anything useful so we can <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> them out:</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cars_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/mtcarsex.csv"</span><span class="op">)</span>, na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-999"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span></span>
+<span>  mpg <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cyl <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_factor.html">col_factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  disp <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  hp <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  drat <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  wt <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  qsec <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  vs <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_factor.html">col_factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  am <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  gear <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  carb <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_double</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cars_df</span></span>
+<span><span class="co">#&gt; # A tibble: 32 × 11</span></span>
+<span><span class="co">#&gt;     mpg cyl    disp    hp  drat    wt  qsec vs       am  gear  carb</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  NA   6       160   110  3.9   2.62  16.5 0         1     4     4</span></span>
+<span><span class="co">#&gt; 2  21   6       160   110  3.9   2.88  17.0 0         1     4     4</span></span>
+<span><span class="co">#&gt; 3  22.8 4       108    93  3.85  2.32  18.6 1         1     4     1</span></span>
+<span><span class="co">#&gt; 4  21.4 6       258   110  3.08  3.22  19.4 1         0     3     1</span></span>
+<span><span class="co">#&gt; 5  NA   8       360   175  3.15  3.44  17.0 0         0     3     2</span></span>
+<span><span class="co">#&gt; 6  18.1 6       225   105  2.76  3.46  20.2 1         0     3     1</span></span>
+<span><span class="co">#&gt; # ℹ 26 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are <strong>many</strong> other possible file formats for data storage. For example, there is a data set called <code>oscars.tsv</code>, which is a tab-separated file. You can read it in with <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> instead of <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">oscars_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/oscars.tsv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">oscars_df</span></span>
+<span><span class="co">#&gt; # A tibble: 134 × 51</span></span>
+<span><span class="co">#&gt;   FilmName  OscarYear Duration Rating DirectorName DirectorGender OscarWinner</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Crash          2006      113      4 Haggis                    0           1</span></span>
+<span><span class="co">#&gt; 2 Brokebac…      2006      134      4 Lee                       0           0</span></span>
+<span><span class="co">#&gt; 3 Capote         2006      114      4 Miller                    0           0</span></span>
+<span><span class="co">#&gt; 4 Good Nig…      2006       93      2 Clooney                   0           0</span></span>
+<span><span class="co">#&gt; 5 Munich         2006      164      4 Spielberg                 0           0</span></span>
+<span><span class="co">#&gt; 6 The Depa…      2007      151      4 Scorsese                  0           1</span></span>
+<span><span class="co">#&gt; # ℹ 128 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 44 more variables: GenreName &lt;chr&gt;, Genre_Drama &lt;dbl&gt;, Genre_Bio &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   CountryName &lt;chr&gt;, ForeignandUSA &lt;dbl&gt;, ProductionName &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   ProductionCompany &lt;dbl&gt;, BudgetRevised &lt;chr&gt;, Budget &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   DomesticBoxOffice &lt;dbl&gt;, WorldwideRevised &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   WorldwideBoxOffice &lt;dbl&gt;, DomesticPercent &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   LimitedOpeningWnd &lt;dbl&gt;, LimitedTheaters &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We’ll be able to work with .txt files and Excel files in the Exercises. Check out <a href="https://rawgit.com/rstudio/cheatsheets/master/data-import.pdf" target="_blank">https://rawgit.com/rstudio/cheatsheets/master/data-import.pdf</a> for a data import cheatsheet.</p>
+</div>
+</div>
+<p>The final issue that we will discuss in this section occurs when a data set has units within its cells. Consider the earlier example that we used in the reprex section:</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/parsedf.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">test_df</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span><span class="co">#&gt;   x                   y</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 20,000 dollars      1</span></span>
+<span><span class="co">#&gt; 2 40 dollars          2</span></span>
+<span><span class="co">#&gt; 3 only 13 dollars     3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> function is really useful if we just want the number (no commas, no units, etc.). The function is often paired with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> since we are creating a new variable:</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">test_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;   x                   y    x2</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 20,000 dollars      1 20000</span></span>
+<span><span class="co">#&gt; 2 40 dollars          2    40</span></span>
+<span><span class="co">#&gt; 3 only 13 dollars     3    13</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise 1</strong>. Recall the fitness data set.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fitness_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/higham_fitness_notclean.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use the <code>col_types</code> argument in <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> so that <code>stepgoal</code> is read in as a logical variable with <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical()</a></code> and so that <code>month</code> and <code>weekday</code> are both read in as factors.</p>
+</section></section><section id="data-scraping-with-rvest" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="data-scraping-with-rvest">
+<span class="header-section-number">11.2</span> Data Scraping with <code>rvest</code>
+</h2>
+<p>Sometimes, we might want data from a public website that <strong>isn’t</strong> provided in a file format. To obtain this data, we’ll need to use web scraping, a term which just means “getting data from a website.” The easiest way to do this in <code>R</code> is with the <code>rvest</code> package. Note that we could spend an entire semester talking about web scraping, but we will focus only on websites where the scraping of data is “easy” and won’t give us any major errors.</p>
+<p>Go to the following website and suppose that you wanted the table of gun violence statistics in <code>R</code>: <a href="https://en.wikipedia.org/wiki/Gun_violence_in_the_United_States_by_state" target="_blank">https://en.wikipedia.org/wiki/Gun_violence_in_the_United_States_by_state</a>. We could try copy-pasting the table into Excel and reading the data set in with <code>read_excel()</code>. Depending on the format of the table, that strategy may work but it may not. Another way is to scrape it directly with <code>rvest</code>. Additionally, if the website continually updates (standings for a sports league, enrollment data for a school, best-selling products for a company, etc.), then scraping is much more convenient, as we don’t need to continually copy-paste for updated data.</p>
+<p>In the following code chunk, <code><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html()</a></code> reads in the entire html file from the url provided while <code><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes()</a></code> extracts only the tables on the website.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## provide the URL and name it something (in this case, url).</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/wiki/Gun_violence_in_the_United_States_by_state"</span></span>
+<span></span>
+<span><span class="co">## read_html() convert the html code from the URL into something R can read</span></span>
+<span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span> <span class="co">## html_nodes can grab only the tables </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We see that, for this example, there are 3 tables provided. The tables are stored in a <code>list</code> and we can reference the first table using <code>[[1]]</code>, the second table using <code>[[2]]</code>, etc.</p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the purposes of this class, we will figure out which of the 3 tables is the one we actually want using trial and error.</p>
+</div>
+</div>
+<p>The <code><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table()</a></code> function converts the table into a <code>data.frame</code> object.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">test1</span> <span class="op">&lt;-</span> <span class="va">tab</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">test1</span></span>
+<span><span class="va">test2</span> <span class="op">&lt;-</span> <span class="va">tab</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">test2</span></span>
+<span><span class="va">test3</span> <span class="op">&lt;-</span> <span class="va">tab</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">test3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Which of the 3 tables is the one that we would want to use for an analysis on gun violence in the United States?</p>
+<p>As another example, consider scraping data from SLU’s athletics page. In particular, suppose we want to do an analysis on SLU’s baseball team.</p>
+<p>Go to the following website to look at the table of data that we want to scrape: <a href="https://saintsathletics.com/sports/baseball/stats/2023" target="_blank">https://saintsathletics.com/sports/baseball/stats/2023</a>.</p>
+<p>After looking at the website, use the following code to scrape the data set.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://saintsathletics.com/sports/baseball/stats/2023"</span></span>
+<span></span>
+<span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span></span>
+<span><span class="va">tab</span></span>
+<span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="va">tab</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">obj</span></span>
+<span><span class="va">obj2</span> <span class="op">&lt;-</span> <span class="va">tab</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">obj2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There’s now 72 different tables! See if you can figure out where the first few tables are coming from on the website.</p>
+<p><strong>Exercise 2</strong>. SLU keeps track of diversity of students and makes this data public on the following website: <a href="https://www.stlawu.edu/offices/institutional-research/student-diversity-2021" target="_blank">https://www.stlawu.edu/offices/institutional-research/student-diversity-2021</a>. Use <code>rvest</code> to scrape one of the data tables into <code>R</code>.</p>
+</section><section id="json-files-with-jsonlite" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="json-files-with-jsonlite">
+<span class="header-section-number">11.3</span> JSON Files with <code>jsonlite</code>
+</h2>
+<p>A final common data format that we will discuss is JSON (JavaScript Object Notation). We will only cover the very basics of JSON data and use the <code>jsonlite</code> package in <code>R</code> to read in some .json files. JSON files are read in to <code>R</code> as a <code>list</code> object.</p>
+<section id="everything-working-well" class="level3" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="everything-working-well">
+<span class="header-section-number">11.3.1</span> Everything Working Well</h3>
+<p>First, consider data from the mobile game Clash Royale. Install the <code>jsonlite</code> package and then use it to read in the <code>json</code> file with the function <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code>:</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## install.packages("jsonlite")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
+<span><span class="va">cr_cards</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/clash_royale_card_info.json"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, type <code>View(cr_cards)</code> in your console (bottom-left) window to look at the data. See if you can pull out the data set by clicking on some things in the <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> window.</p>
+<p>The following give a couple of ways to grab the data using code. The <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble()</a></code> function converts a rectangular object into our familiar <code>tibble</code>.</p>
+<p>The first option specifies the name of the table that’s in the JSON file (in this case, the name is <code>"cards"</code>):</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">cr_cards_flat</span> <span class="op">&lt;-</span> <span class="va">cr_cards</span><span class="op">[[</span><span class="st">"cards"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">cr_cards_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">cr_cards_flat</span><span class="op">)</span></span>
+<span><span class="va">cr_cards_df</span></span>
+<span><span class="co">#&gt; # A tibble: 93 × 8</span></span>
+<span><span class="co">#&gt;   key     name      elixir type  rarity arena description                  id</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;                     &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 knight  Knight         3 Troop Common     0 A tough melee fighter. … 2.6 e7</span></span>
+<span><span class="co">#&gt; 2 archers Archers        3 Troop Common     0 A pair of lightly armor… 2.60e7</span></span>
+<span><span class="co">#&gt; 3 goblins Goblins        2 Troop Common     1 Three fast, unarmored m… 2.60e7</span></span>
+<span><span class="co">#&gt; 4 giant   Giant          5 Troop Rare       0 Slow but durable, only … 2.60e7</span></span>
+<span><span class="co">#&gt; 5 pekka   P.E.K.K.A      7 Troop Epic       4 A heavily armored, slow… 2.60e7</span></span>
+<span><span class="co">#&gt; 6 minions Minions        3 Troop Common     0 Three fast, unarmored f… 2.60e7</span></span>
+<span><span class="co">#&gt; # ℹ 87 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The second method uses the <code>flatten()</code> function from the <code>purrr</code> package, the only package in the core <code>tidyverse</code> that we do not talk about in detail in this class. There is also a different <code>flatten()</code> function in the <code>jsonlite</code> package. In the code below, we specify that we want to use <code>flatten()</code> from <code>purrr</code> with <code>purrr::flatten()</code>. If we wanted to use <code>flatten()</code> from <code>jsonlite</code>, we’d use <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/flatten.html">jsonlite::flatten()</a></code></p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cr_cards_flat2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu">flatten</span><span class="op">(</span><span class="va">cr_cards</span><span class="op">)</span></span>
+<span><span class="va">cr_cards_df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">cr_cards_flat2</span><span class="op">)</span></span>
+<span><span class="va">cr_cards_df2</span></span>
+<span><span class="co">#&gt; # A tibble: 93 × 8</span></span>
+<span><span class="co">#&gt;   key     name      elixir type  rarity arena description                  id</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;                     &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 knight  Knight         3 Troop Common     0 A tough melee fighter. … 2.6 e7</span></span>
+<span><span class="co">#&gt; 2 archers Archers        3 Troop Common     0 A pair of lightly armor… 2.60e7</span></span>
+<span><span class="co">#&gt; 3 goblins Goblins        2 Troop Common     1 Three fast, unarmored m… 2.60e7</span></span>
+<span><span class="co">#&gt; 4 giant   Giant          5 Troop Rare       0 Slow but durable, only … 2.60e7</span></span>
+<span><span class="co">#&gt; 5 pekka   P.E.K.K.A      7 Troop Epic       4 A heavily armored, slow… 2.60e7</span></span>
+<span><span class="co">#&gt; 6 minions Minions        3 Troop Common     0 Three fast, unarmored f… 2.60e7</span></span>
+<span><span class="co">#&gt; # ℹ 87 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Both methods give a <code>tibble</code> that we can then use our usual <code>tidyverse</code> tools <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, etc. on.</p>
+</section><section id="things-arent-always-so-easy" class="level3" data-number="11.3.2"><h3 data-number="11.3.2" class="anchored" data-anchor-id="things-arent-always-so-easy">
+<span class="header-section-number">11.3.2</span> Things Aren’t Always So Easy</h3>
+<p>Now let’s try to look at some animal crossing data that were obtained from <a href="https://github.com/jefflomacy/villagerdb" target="_blank">https://github.com/jefflomacy/villagerdb</a>. We first just want to look at the data from one individual villager (ace) in the file <code>ace.json</code>.</p>
+<div class="cell" data-appendix="true">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acedata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/ace.json"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">aceflat</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu">flatten</span><span class="op">(</span><span class="va">acedata</span><span class="op">)</span></span>
+<span><span class="va">aceflat</span></span>
+<span><span class="co">#&gt; $gender</span></span>
+<span><span class="co">#&gt; [1] "male"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $species</span></span>
+<span><span class="co">#&gt; [1] "bird"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $birthday</span></span>
+<span><span class="co">#&gt; [1] "3-13"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ac</span></span>
+<span><span class="co">#&gt; $ac$personality</span></span>
+<span><span class="co">#&gt; [1] "jock"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ac$clothes</span></span>
+<span><span class="co">#&gt; [1] "spade-shirt"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ac$song</span></span>
+<span><span class="co">#&gt; [1] "K.K. Parade"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ac$phrase</span></span>
+<span><span class="co">#&gt; [1] "ace"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`afe+`</span></span>
+<span><span class="co">#&gt; $`afe+`$personality</span></span>
+<span><span class="co">#&gt; [1] "jock"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`afe+`$clothes</span></span>
+<span><span class="co">#&gt; [1] "spade-shirt"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`afe+`$song</span></span>
+<span><span class="co">#&gt; [1] "K.K. Parade"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $name</span></span>
+<span><span class="co">#&gt; [1] "Ace"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $id</span></span>
+<span><span class="co">#&gt; [1] "ace"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Things are now….more complicated. This example is just to show that it’s not always easy working with JSON data. Lists can be nested and that creates problems when trying to convert a deeply nested list into our “rectangular” format that’s easy to work with.</p>
+<p>There’s also the added problem of reading in the <code>.json</code> files from all villagers at the same time We could do this with a for loop or a mapping function from <code>purrr</code> to download and read in the JSON files for all villagers. We won’t delve any more deeply into this, but there’s a lot more to all of the file formats that we’ve discussed this week, particularly web scraping and .json files.</p>
+</section></section><section id="practice" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="practice">
+<span class="header-section-number">11.4</span> Practice</h2>
+<section id="class-exercises" class="level3" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="class-exercises">
+<span class="header-section-number">11.4.1</span> Class Exercises</h3>
+<p><strong>Class Exercise 1</strong>. The <code>birthdays.txt</code> file has information on the birthdays of various animals on my Animal Crossing island. There are also columns for the Animal’s Name, Animal Type, and how long the animal has lived on the island (in weeks). Click on the file to open it to look at the format of the data.</p>
+<p>Start with the following code chunk and use the options of <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> to read in the data (<code><a href="https://readr.tidyverse.org/reference/read_delim.html">?read_delim</a></code>). The <code>delim</code> argument that’s already provided specifies that the delimiter (separator) that you’ll use is a <code>-</code>, as opposed to, for example, a <code>,</code> in a .csv file. Arguments that you may need to change include</p>
+<ul>
+<li><code>skip</code></li>
+<li><code>col_names</code></li>
+<li><code>na</code></li>
+<li><code>trim_ws</code></li>
+<li><code>col_types</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/birthdays.txt"</span><span class="op">)</span>, delim <span class="op">=</span> <span class="st">" - "</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Class Exercise 2</strong>. Another common format for data to be stored in is an Excel file. Often, it’s easiest just to save the Excel file as a .csv file and read it in using <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>. But, sometimes this route can be difficult (for example, if your Excel file has thousands of sheets). To read in directly from Excel, you’ll need to install the <code>readxl</code> with <code>install.packages("readxl")</code>. Once installed, load the package with <code><a href="https://readxl.tidyverse.org">library(readxl)</a></code>, and read in the first sheet <code>evals_prof.xlsx</code> data set, a similar data set as the one that will be used for Project 2, with the <code>read_excel()</code> function.</p>
+<p><strong>Class Exercise 3</strong>. Now, read in the second sheet in the Excel file, using the help file for <code>?read_excel</code> to change one of the arguments.</p>
+<p><strong>Class Exercise 4</strong>. Construct a barplot of highest ranked ATP (men’s tennis) players right now. You will need to scrape some data from <a href="https://en.wikipedia.org/wiki/Current_tennis_rankings" class="uri">https://en.wikipedia.org/wiki/Current_tennis_rankings</a> to construct this plot.</p>
+<p><strong>Class Exercise 5</strong>. A common issue when scraping tables with <code>rvest</code> is that there are tables that have two rows of headers, often with duplicate names in one or both of the rows. Examine this issue at <a href="https://en.wikipedia.org/wiki/Josh_Allen_(quarterback)" target="_blank">https://en.wikipedia.org/wiki/Josh_Allen_(quarterback)</a>, scrolling down to the NFL career statistics subsection.</p>
+<p>Try to scrape Josh Allen’s stats using the “usual” data scraping method with <code>rvest</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">url1</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/wiki/Josh_Allen_(quarterback)"</span></span>
+<span><span class="va">tab_allen_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="va">url1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span></span>
+<span><span class="va">allen_df</span> <span class="op">&lt;-</span> <span class="va">tab_allen_stats</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">allen_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Try to perform <strong>any</strong> operation on <code>allen_df</code> (a <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>, or anything else). What error do you get?</p>
+<p>To fix this issue, we can use the <code>header = FALSE</code> argument to <code><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table()</a></code> and then “manually” construct the column names:</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">allen_stats</span> <span class="op">&lt;-</span> <span class="va">tab_allen_stats</span><span class="op">[[</span><span class="fl">7</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="va">allen_stats</span></span>
+<span></span>
+<span><span class="va">newnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">allen_stats</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>, <span class="va">allen_stats</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">allen_stats</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">newnames</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explain what the code above is doing to fix the duplicate name issue.</p>
+</section><section id="your-turn" class="level3" data-number="11.4.2"><h3 data-number="11.4.2" class="anchored" data-anchor-id="your-turn">
+<span class="header-section-number">11.4.2</span> Your Turn</h3>
+<p><strong>Your Turn 1</strong>. Choose a topic/person/place/etc. that interests you that has tables on Wikipedia and scrape the table that is related to that topic.</p>
+<p><strong>Your Turn 2</strong>. Choose a sports team at SLU, and go to that team’s website (by simply googling SLU name_of_sport). Scrape the data tables from the “Results” or “Statistics” section of this sport. After you scrape the data, tidy the data set. Then, choose one of the following options (different options might make more/less sense for different sports)</p>
+<ol type="a">
+<li><p>Summarise different <strong>team</strong> statistics, either numerically or graphically. Perhaps make some graphs showing different statistics through time.</p></li>
+<li><p>Summarise different <strong>individual</strong> statistics, either numerically or graphically.</p></li>
+</ol>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A few sports (men’s and women’s golf, for example), give results in PDF format. PDF format is generally a horrible way to record and share data, as it’s very difficult to read in to almost any program. Therefore, avoid sports with PDF results for the purposes of this exercise.</p>
+</div>
+</div>
+<p><strong>Your Turn 3</strong>. For either your topic of choice data set or your sports team data set, ask and answer any other questions that make sense for the particular topic or sport that you are looking at!</p>
+<!-- ### Exercises {#exercise-8-4} -->
+<!-- Exercises marked with an \* indicate that the exercise has a solution at the end of the chapter at \@ref(solutions-8). -->
+<!-- 1. \* Read in the `pokedex.json` file, a data set that has information on the 151 original Pokemon. Then, use the `flatten()` function from `purrr` to flatten the list. -->
+<!-- 2. \* Use `as_tibble()` to convert your flattened list to a `tibble`. -->
+<!-- 3. \* Use `parse_number()` with `mutate()` to tidy two of the variables in the data set. -->
+<!-- 4. \* Look at the `type` variable. What looks odd about it? What happens when you try to use it, either in a plot, or using a `dplyr` function? -->
+<!-- You can `unnest()` the `Type` variable with the `unnest()` function from `tidyr`. We didn't discuss this function but feel free to read about it with `?unnest` -->
+<!-- ```{r, echo = FALSE, message = FALSE, warning = FALSE} -->
+<!-- library(jsonlite) -->
+<!-- pokedex <- fromJSON(here("data/pokedex.json")) -->
+<!-- df <- purrr::flatten(pokedex) -->
+<!-- pokemon_df <- as_tibble(df) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- pokemon_unnest <- unnest(pokemon_df, cols = c(type)) -->
+<!-- ``` -->
+<!-- 5. There are 6 pokemon with a `spawn_chance` of 0. Figure out what these 6 pokemon are. -->
+<!-- ```{r, echo = FALSE, results = "hide"} -->
+<!-- pokemon_df |> arrange(spawn_chance) |> -->
+<!--   filter(spawn_chance == 0) |> -->
+<!--   select(spawn_chance, everything())  -->
+<!-- ``` -->
+<!-- 6. Figure out what the 5 most common Pokemon types are in the first generation (you'll need to use the `unnest()`-ed data set for this: why?).  -->
+<!-- ```{r, echo = FALSE, results = "hide"} -->
+<!-- pokemon_unnest |> group_by(type) |> -->
+<!--   summarise(total_type = n()) |> -->
+<!--   arrange(desc(total_type)) -->
+<!-- ## 5 most common -->
+<!-- pokemon_unnest |> group_by(type) |> -->
+<!--   summarise(total_type = n()) |> -->
+<!--   arrange(desc(total_type)) |> -->
+<!--   slice(1:5) -->
+<!-- ``` -->
+<!-- 1. \* Read in the `pokedex.json` file, a data set that has information on the 151 original Pokemon. Then, use the `flatten()` function from `purrr` to flatten the list. -->
+<!-- 2. \* Use `as_tibble()` to convert your flattened list to a `tibble`. -->
+<!-- 3. \* Use `parse_number()` with `mutate()` to tidy two of the variables in the data set. -->
+<!-- 4. \* Look at the `type` variable. What looks odd about it? What happens when you try to use it, either in a plot, or using a `dplyr` function? -->
+<!-- You can `unnest()` the `Type` variable with the `unnest()` function from `tidyr`. We didn't discuss this function but feel free to read about it with `?unnest` -->
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./10-merging.html" class="pagination-link" aria-label="Merging with `dplyr`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Merging with <code>dplyr</code></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./13-knn.html" class="pagination-link" aria-label="Predictive Modeling with knn">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Predictive Modeling with knn</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Course Materials were written by Matt Higham for STAT/DATA 234 at St.&nbsp;Lawrence University.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>
