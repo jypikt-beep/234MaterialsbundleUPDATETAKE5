@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>DATA / STAT 234</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./01-intro.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link href="modern.css" rel="stylesheet">
+<script src="modern.js" defer></script>
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Syllabus and Course Information</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">DATA / STAT 234</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Syllabus and Course Information</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">The Core</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Plotting with <code>ggplot2</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Wrangling with <code>dplyr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-comm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Communication with <code>Quarto</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Workflow and Other Skills</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Data Wrangling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-tidyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tidying with <code>tidyr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-forcats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Factors with <code>forcats</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Coding in Base <code>R</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Ethics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-merging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Merging with <code>dplyr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Import</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Special Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-knn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Predictive Modeling with knn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-stringr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Text Data with <code>tidytext</code> and <code>stringr</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-lubridate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Dates with <code>lubridate</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-connections.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Connections to STAT 113, STAT 213, and CS 140</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to SQL with <code>dbplyr</code></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#syllabus-and-course-information" id="toc-syllabus-and-course-information" class="nav-link active" data-scroll-target="#syllabus-and-course-information">Syllabus and Course Information</a>
+  <ul class="collapse">
+  <li><a href="#general-information" id="toc-general-information" class="nav-link" data-scroll-target="#general-information">General Information</a></li>
+  <li><a href="#course-information" id="toc-course-information" class="nav-link" data-scroll-target="#course-information">Course Information</a>
+  <ul class="collapse">
+  <li><a href="#use-of-r-and-rstudio" id="toc-use-of-r-and-rstudio" class="nav-link" data-scroll-target="#use-of-r-and-rstudio">Use of <code>R</code> and <code>RStudio</code></a></li>
+  </ul></li>
+  <li><a href="#general-course-outcomes" id="toc-general-course-outcomes" class="nav-link" data-scroll-target="#general-course-outcomes">General Course Outcomes</a></li>
+  <li><a href="#how-you-will-be-assessed" id="toc-how-you-will-be-assessed" class="nav-link" data-scroll-target="#how-you-will-be-assessed">How You Will Be Assessed</a>
+  <ul class="collapse">
+  <li><a href="#breakdown" id="toc-breakdown" class="nav-link" data-scroll-target="#breakdown">Breakdown</a></li>
+  <li><a href="#grading-scale" id="toc-grading-scale" class="nav-link" data-scroll-target="#grading-scale">Grading Scale</a></li>
+  </ul></li>
+  <li><a href="#collaboration-diversity-accessibility-and-academic-integrity" id="toc-collaboration-diversity-accessibility-and-academic-integrity" class="nav-link" data-scroll-target="#collaboration-diversity-accessibility-and-academic-integrity">Collaboration, Diversity, Accessibility, and Academic Integrity</a>
+  <ul class="collapse">
+  <li><a href="#rules-for-collaboration-and-ai" id="toc-rules-for-collaboration-and-ai" class="nav-link" data-scroll-target="#rules-for-collaboration-and-ai">Rules for Collaboration and AI</a></li>
+  <li><a href="#diversity-statement" id="toc-diversity-statement" class="nav-link" data-scroll-target="#diversity-statement">Diversity Statement</a></li>
+  <li><a href="#accessibility-statement" id="toc-accessibility-statement" class="nav-link" data-scroll-target="#accessibility-statement">Accessibility Statement</a></li>
+  <li><a href="#academic-dishonesty" id="toc-academic-dishonesty" class="nav-link" data-scroll-target="#academic-dishonesty">Academic Dishonesty</a></li>
+  </ul></li>
+  <li><a href="#tentative-schedule" id="toc-tentative-schedule" class="nav-link" data-scroll-target="#tentative-schedule">Tentative Schedule</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">DATA / STAT 234</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="syllabus-and-course-information" class="level1 unnumbered">
+<h1 class="unnumbered">Syllabus and Course Information</h1>
+<p>Welcome! This is the course materials website for DATA / STAT 234. Though we will use other sources at times, we will use materials on this site most heavily.</p>
+<section id="general-information" class="level2">
+<h2 class="anchored" data-anchor-id="general-information">General Information</h2>
+<p><strong>Instructor Information</strong></p>
+<ul>
+<li>Professor: Matt Higham</li>
+<li>Office: Bewkes 123</li>
+<li>Email: <a href="mailto:mhigham@stlawu.edu" class="email">mhigham@stlawu.edu</a></li>
+<li>Semester: Spring 2026</li>
+<li>Sections:
+<ul>
+<li>MWF 10:30 - 11:30</li>
+<li>MWF 11:40 - 12:40</li>
+</ul></li>
+<li>Office Hours: 15 minute slots bookable at <a href="https://calendly.com/mhigham/prof-higham-office-hours" target="_blank">my calendly page</a>.
+<ul>
+<li>Note that you must book a time for office hours at least 12 hours in advance to guarantee that I am present and available at that time.</li>
+</ul></li>
+<li>Teaching Assistant: Lala Sefale <a href="mailto:msefa24@stlawu.edu" class="email">msefa24@stlawu.edu</a></li>
+</ul>
+<p><strong>Course Materials</strong></p>
+<ul>
+<li><a href="https://highamm.github.io/ds234_quarto/" target="_blank">DATA_STAT 234 Materials Bundle</a>. This will be our primary source of materials.</li>
+<li>Textbooks (only used as references):
+<ul>
+<li>R for Data Science by Grolemund and Wickham, found <a href="https://r4ds.had.co.nz/" target="_blank">here</a> in a free online version.</li>
+<li>Modern Data Science with <code>R</code> by Baumer, Kaplan, and Horton, found <a href="https://mdsr-book.github.io/mdsr2e/" target="_blank">here</a> in a free online version.</li>
+</ul></li>
+<li>Computer with Internet access.</li>
+</ul>
+<hr>
+<hr>
+</section>
+<section id="course-information" class="level2">
+<h2 class="anchored" data-anchor-id="course-information">Course Information</h2>
+<p>Welcome to DATA/STAT 234! The overall purpose of this course is learn the data science skills necessary to complete large-scale data analysis projects. The tool that we will be using to achieve this goal is the statistical software language <code>R</code>. We will work with a wide variety of interesting data sets throughout the semester to build our <code>R</code> skills. In particular, we will focus on the Data Analysis Life Cycle (Grolemund and Wickham 2020):</p>
+<p><img src="data-science.png" class="img-fluid"></p>
+<p>We will put more emphasis on the <em>Import, Tidy, Transform, Visualize, and Communicate</em> parts of the cycle, as an introduction to <em>Modeling</em> part is covered in STAT 213.</p>
+<section id="use-of-r-and-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="use-of-r-and-rstudio">Use of <code>R</code> and <code>RStudio</code></h3>
+<p>We will use the statistical software <code>R</code> to construct graphs and analyze data. A few notes:</p>
+<ul>
+<li><code>R</code> and <code>RStudio</code> are both free to use.</li>
+<li>Additionally, we will be using <code>Quarto</code> for data analysis reports. <em>Note</em>: It’s always nice to start assignments and projects as early as possible, but this is particularly important to do for assignments and projects involving <code>R</code>. It’s no fun to try and figure out why code is not working at the last minute. If you start early enough though, you will have plenty of time to seek help and therefore won’t waste a lot of time on a coding error.</li>
+</ul>
+<hr>
+<hr>
+</section>
+</section>
+<section id="general-course-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="general-course-outcomes">General Course Outcomes</h2>
+<ol type="1">
+<li><p><em>Import</em> data of a few different types into <code>R</code> for analysis.</p></li>
+<li><p><em>Tidy</em> data into a form that can be more easily visualized, summarised, and modeled.</p></li>
+<li><p><em>Transform</em>, <em>Wrangle</em>, and <em>Visualize</em> variables in a data set to assess patterns in the data.</p></li>
+<li><p><em>Communicate</em> the results of your analysis to a target audience with a written report, or, possibly an oral presentation.</p></li>
+<li><p>Practice reproducible statistical practices through the use of <code>Quarto</code> for data analysis projects.</p></li>
+<li><p>Explain why it is ethically important to consider the context that a data set comes in.</p></li>
+<li><p>Develop the necessary skills to be able to ask and answer future data analysis questions on your own, either using <code>R</code> or another program, such as Python.</p></li>
+</ol>
+<p>To paraphrase the <em>R for Data Science</em> textbook, about 80% of the skills necessary to do a complete data analysi s project can be learned through coursework in classes like this one. But, 20% of any particular project will involve learning new things that are specific to that project. Achieving Goal # 7 will allow you to learn this extra 20% on your own.</p>
+<hr>
+<hr>
+</section>
+<section id="how-you-will-be-assessed" class="level2">
+<h2 class="anchored" data-anchor-id="how-you-will-be-assessed">How You Will Be Assessed</h2>
+<p>The components to your grade are described below:</p>
+<ul>
+<li>Modules</li>
+</ul>
+<p>Aside from the first module (which has a unique structure), the modules in the course will be composed of either:</p>
+<ol type="1">
+<li><p>A reading assignment due on Monday (worth <strong>5</strong> points), a take-home quiz due on Wednesday (worth <strong>5</strong> points), and a handwritten in-class quiz on Wednesday (worth <strong>70</strong> points). We should have 4 total modules follow this structure.</p></li>
+<li><p>A reading assignment on Monday (worth <strong>5</strong> points), a take-home quiz due on Wednesday (worth <strong>5</strong> points), and an in-class coding quiz taken on a computer on Wednesday (worth <strong>70</strong> points). We should have 3 total modules follow this structure.</p></li>
+<li><p>An reading assignment due on Monday (worth <strong>5</strong> points), a participation assessment (worth <strong>5</strong> points), a Project due Wednesday (worth <strong>35</strong> points), and a handwritten in-class assessment specifically about the Project on Wednesday (worth <strong>40</strong> points). We should have 3 total modules follow this structure.</p></li>
+</ol>
+<p>The lowest module will be dropped from your grade so the total number of points available from all modules is <code>10 * 80 = 800</code> points.</p>
+<p>Additionally, for <strong>one</strong> module, you are permitted to complete whatever is due for that module late and turn it in by the following class period. You can contact me via email to schedule a make-up time to take the in-person-quiz part of the module (again, this time should be scheduled so that you make up the quiz before the following class).</p>
+<p>Finally, if you choose to take the (optional) in-person final exam (described below), the score that you earn on that final will replace your second lowest module score.</p>
+<ul>
+<li>Participation</li>
+</ul>
+<p>At three times throughout the semester, you will be asked to assess and reflect upon your participation and engagement in this course. Each assessment will be worth <strong>20 points</strong> (for a total of <strong>60 points</strong>) throughout the semester. The specific assessment will be shared on Canvas.</p>
+<!-- 26 days total if I subtract Week 0, all quiz days, and all days after the final quiz. -->
+<!-- 25 days total if I also subtract the Friday before spring break -->
+<!-- There will be approximately 24 days of class where you turn in a sketch or a strategy. However, life happens and you may need to miss a couple of classes. Therefore, participation will be graded out of __80 points__. There will not be extra credit for earning more than 80 points so that no one is penalized for needing to miss a couple of classes. There will not be any make-ups for participation. -->
+<ul>
+<li>Final Project</li>
+</ul>
+<p>There is one final project, worth 80 points. The primary purpose of the final project is to give you an opportunity to assemble topics throughout the course into one coherent data analysis. You will be able to choose the data set you use for your final project, so you might begin thinking about a particular topic or data set you are interested in exploring. The final project will be presented in a format to be decided later in the semester.</p>
+<ul>
+<li>Final Exam</li>
+</ul>
+<p>There is an optional Final Exam worth 60 points. You <strong>must</strong> be on campus for our final exam time if you would like to take the optional final exam. If you do not take the optional final, then the <strong>average</strong> of your 10 highest module scores will be used for the 60 points for this exam.</p>
+<p>If you take the final exam and if your final exam score percentage is better than your 2nd lowest module grade, then that grade will be replaced with your final exam score. For example, suppose your 11 module scores are: <code>80, 80, 75, 75, 70, 59, 58, 50, 34, 15, 0</code>. You take the final exam and score a <code>54 / 60 = 90%</code>. Then, the <code>54</code> is used for your final exam score and your new module scores would be: <code>80, 80, 75, 75, 70, 59, 58, 50, 34, 72, 0</code>. (The second lowest value of <code>15</code> is replaced by 90% of 80, which is <code>72</code>. The <code>0</code> would still be dropped as your lowest module score).</p>
+<section id="breakdown" class="level3">
+<h3 class="anchored" data-anchor-id="breakdown">Breakdown</h3>
+<ul>
+<li>800 points for Modules</li>
+<li>60 points for Participation</li>
+<li>60 points for the (optional) Final Exam</li>
+<li>80 points for the Final Project</li>
+</ul>
+<p>Points add up to 1000 so your grade at the end of the semester will be the number of points you’ve earned across all categories divided by 1000.</p>
+</section>
+<section id="grading-scale" class="level3">
+<h3 class="anchored" data-anchor-id="grading-scale">Grading Scale</h3>
+<p>The following is a <em>rough</em> grading scale. I reserve the right to make any changes to the scale if necessary.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grade</th>
+<th>4.0</th>
+<th>3.75</th>
+<th>3.5</th>
+<th>3.25</th>
+<th>3.0</th>
+<th>2.75</th>
+<th>2.5</th>
+<th>2.25</th>
+<th>2.0</th>
+<th>1.75</th>
+<th>1.5</th>
+<th>1.25</th>
+<th>1.0</th>
+<th>0.0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Points</td>
+<td>950-1000</td>
+<td>920-949</td>
+<td>890-919</td>
+<td>860-889</td>
+<td>830-859</td>
+<td>800-829</td>
+<td>770-799</td>
+<td>750-769</td>
+<td>720-749</td>
+<td>700-719</td>
+<td>670-699</td>
+<td>640-669</td>
+<td>600-639</td>
+<td>0-599</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+</section>
+</section>
+<section id="collaboration-diversity-accessibility-and-academic-integrity" class="level2">
+<h2 class="anchored" data-anchor-id="collaboration-diversity-accessibility-and-academic-integrity">Collaboration, Diversity, Accessibility, and Academic Integrity</h2>
+<section id="rules-for-collaboration-and-ai" class="level3">
+<h3 class="anchored" data-anchor-id="rules-for-collaboration-and-ai">Rules for Collaboration and AI</h3>
+<p>Collaboration with your classmates on exercises, take-home quizzes, and projects is encouraged, but you must follow these guidelines:</p>
+<ul>
+<li>Each project and assignment will have a written statement about the AI policy. Make sure to carefully read and follow this policy! Note that you are never permitted to use generative AI on in-class quizzes.</li>
+<li>you must state the name(s) of who you collaborated with at the top of each assessment.</li>
+<li>all work must be your own. This means that you should <strong>never</strong> send someone your code via email or let someone directly type code off of your screen. Instead, you can talk about strategies for solving problems and help or ask someone about a coding error.</li>
+<li>you may use the Internet and StackExchange, but you also should not copy paste code directly from the website, without citing that you did so.</li>
+<li>any code that is from outside of our class and course materials will not be graded, unless you cite the specific source for where you obtained that code.</li>
+</ul>
+<p>My advice for this course is to simply not use generative AI for anything in the class. This is a foundational course, and I have found that students who use AI (even within the rules of the course) rarely benefit in terms of learning. If you have a question about anything or have an error in your code, I am always happy to help!</p>
+<hr>
+<hr>
+</section>
+<section id="diversity-statement" class="level3">
+<h3 class="anchored" data-anchor-id="diversity-statement">Diversity Statement</h3>
+<p>Diversity encompasses differences in age, colour, ethnicity, national origin, gender, physical or mental ability, religion, socioeconomic background, veteran status, sexual orientation, and marginalized groups. The interaction of different human characteristics brings about a positive learning environment. Diversity is both respected and valued in this classroom.</p>
+<hr>
+<hr>
+</section>
+<section id="accessibility-statement" class="level3">
+<h3 class="anchored" data-anchor-id="accessibility-statement">Accessibility Statement</h3>
+<p>The message below is copied from the Student Accessibility Services Office:</p>
+<p>Your experience in this class is important to me. It is the policy and practice of St.&nbsp;Lawrence University to create inclusive and accessible learning environments consistent with federal and state law. If you have established accommodations with the Student Accessibility Services Office in the past, please activate your accommodations so we can discuss how they will be implemented in this course.</p>
+<p>If you have not yet established services through the Student Accessibility Services Office but have a temporary health condition or permanent disability that requires accommodations (conditions include but not limited to; mental health, attention-related, learning, vision, hearing, physical or health impacts), please contact the Student Accessibility Services Office directly to set up a meeting. The Student Accessibility Services Office will work with you on the interactive process that establishes reasonable accommodations.</p>
+<p><strong>Color Vision Deficiency</strong>: The Student Accessibility Services office can loan glasses for students who are color vision deficient. Please contact the office to make an appointment.</p>
+<p>For more specific information about setting up an appointment with Student Accessibility Services please see the options listed below:</p>
+<p>Telephone: 315.229.5537</p>
+<p>Email: studentaccessibility@stlawu.edu</p>
+<p>Website: <a href="https://www.stlawu.edu/offices/student-accessibility-services" class="uri">https://www.stlawu.edu/offices/student-accessibility-services</a></p>
+<hr>
+<hr>
+</section>
+<section id="academic-dishonesty" class="level3">
+<h3 class="anchored" data-anchor-id="academic-dishonesty">Academic Dishonesty</h3>
+<p>Academic dishonesty will not be tolerated. Any specific policies for this course are supplementary to the</p>
+<p>Honor Code. According to the St.&nbsp;Lawrence University Academic Honor Policy,</p>
+<ol type="1">
+<li>It is assumed that all work is done by the student unless the instructor/mentor/employer gives specific permission for collaboration.</li>
+<li>Cheating on examinations and tests consists of knowingly giving or using or attempting to use unauthorized assistance during examinations or tests.</li>
+<li>Dishonesty in work outside of examinations and tests consists of handing in or presenting as original work which is not original, where originality is required.</li>
+</ol>
+<p><em>Claims of ignorance and academic or personal pressure are unacceptable as excuses for academic dishonesty.</em> Students must learn what constitutes one’s own work and how the work of others must be acknowledged.</p>
+<p>For more information, refer to <a href="https://www.stlawu.edu/acadaffairs/academic_honor_policy.pdf">www.stlawu.edu/acadaffairs/<strong>academic</strong>_<strong>honor</strong>_policy.pdf</a>.</p>
+<p>To avoid academic dishonesty, it is important that you follow all directions and collaboration rules and ask for clarification if you have any questions about what is acceptable for a particular assignment or exam. If I suspect academic dishonesty, a score of zero will be given for the entire assignment in which the academic dishonesty occurred <strong>for all individuals involved</strong> and Academic Honor Council will be notified. If a pattern of academic dishonesty is found to have occurred, a grade of 0.0 for the entire course can be given.</p>
+<p>It is important to work in a way that maximizes your learning. Be aware that students who rely too much on others for the homework and projects tend to do poorly on the quizzes and exams.</p>
+<p><em>Please note that in addition the above, any assignments in which your score is reduced due to academic dishonesty will not be dropped according to the quiz policy e.g., if you receive a zero on a quiz because of academic dishonesty, it will not be dropped from your grade.</em></p>
+<hr>
+<hr>
+</section>
+</section>
+<section id="tentative-schedule" class="level2">
+<h2 class="anchored" data-anchor-id="tentative-schedule">Tentative Schedule</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Date</th>
+<th>Topics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1/14</td>
+<td>Introduction to <code>R</code>, <code>R Studio</code></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1/19</td>
+<td>Graphics with <code>ggplot2</code></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1/26</td>
+<td>Data Wrangling with <code>dplyr</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2/2</td>
+<td>Communication with <code>Quarto</code> and <code>ggplot2</code></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2/9</td>
+<td>Soft Skills and Workflow</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2/16</td>
+<td>Data Tidying with <code>tidyr</code></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>2/23</td>
+<td>Factors with <code>forcats</code></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>3/2</td>
+<td>Base <code>R</code> and Data Ethics</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>3/9</td>
+<td>Data Merging with <code>dplyr</code></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>3/16</td>
+<td>Data Import with <code>readr</code>, <code>jsonlite</code>, <code>rvest</code>, and <code>tibble</code></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>3/30</td>
+<td>Intro to Statistical/Machine Learning with knn</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>4/6</td>
+<td>Text Data with <code>tidytext</code> and <code>stringr</code></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>4/13</td>
+<td>Dates and Times with <code>lubridate</code></td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>4/20</td>
+<td>Connections to STAT and CS</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>4/27</td>
+<td>Databases and SQL with <code>dbplyr</code></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./01-intro.html" class="pagination-link" aria-label="Getting Started">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Course Materials were written by Matt Higham for STAT/DATA 234 at St.&nbsp;Lawrence University.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
